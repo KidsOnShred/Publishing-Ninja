@@ -1,0 +1,224 @@
+##
+##
+##	ANGEL BUSINESS COMMUNICATIONS
+##	-------------------------------
+##	Filename: .htaccess
+##	Function: Mod-rewriting
+##	Location: Root
+##	Date:     Feb 2013
+##	Author:   Tom Illingworth
+##
+##  
+
+
+## if you want a php script to use a different file extension add them here like: .dll .bob .xml   etc
+AddType application/x-httpd-php .dll
+
+## test
+ErrorDocument 404 /404.php
+# php_flag display_errors off
+
+## needed on some servers
+#Options +FollowSymLinks
+#Options +Indexes
+
+# set the root - probably not needed on this server, but it works
+RewriteEngine On
+RewriteBase /   
+
+#PHP SETTINGS
+<IfModule mod_php5.c>
+php_value allow_call_time_pass_reference 1 
+</IfModule>
+
+
+#################################### 2 redirect versions - use only 1 at a time
+
+
+### this should forward to non-www version even if accessed by www version
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$
+# RewriteRule (.*) http://%1/$1 [R=301,L]
+
+### this forwards to www version even if accessed through non-www.
+RewriteCond %{HTTP_HOST}  ^([^w]{3}\.?)(.*)$
+RewriteRule (.*) http://www.%1%2/$1 [R=301,L]
+
+
+# NEWS ####################################################################
+
+RewriteEngine On
+RewriteRule ^news/$ news.php [L]
+
+RewriteEngine On
+RewriteRule ^newsletters/$ newsletter.php [L]
+
+RewriteEngine On
+RewriteRule ^news/([^/]*)/$ news.php?type=$1 [L]
+
+RewriteEngine On
+RewriteRule ^news/page/([^/]*)/$ news.php?page=$1 [L]
+
+RewriteEngine On
+RewriteRule ^news/([^/]*)/page/([^/]*)/$ news.php?type=$1&page=$2 [L]
+
+RewriteEngine On
+RewriteRule ^article/([^/]*)/([^/]*)/$ newsfull.php?site=$1&id=$2 [L]
+
+RewriteEngine On
+RewriteRule ^article/([^/]*)-([^/]*).html$ newsfull.php?id=$1&title=$2 [L]
+# example for above:  article/site/id/title
+# site 0 for cs and 1 for sis
+
+RewriteEngine On
+RewriteRule ^newsletters/landing/([^/]*)/([^/]*)/([^/]*)-([^/]*).html$ newsletters/landing/$1.php?site=$2&id=$3&title=$4 [L]
+# example for above:  article/site/id/title
+# site 0 for cs and 1 for sis
+
+
+# FEATURES ####################################################################
+
+RewriteEngine On
+RewriteRule ^features/$ features.php [L]
+
+# EVENTS ####################################################################
+
+RewriteEngine On
+RewriteRule ^events/$ events.php [L]
+
+RewriteEngine On
+RewriteRule ^event/([^/]*)/$ eventdetails.php?id=$1 [L]
+
+# MAGAZINE ####################################################################
+
+RewriteEngine On
+RewriteRule ^magazine/$ magazine.php [L]
+
+RewriteEngine On
+RewriteRule ^magazine/offline/$ offlinemagazine.php [L]
+
+RewriteEngine On
+RewriteRule ^archive/$ archive.php [L]
+
+RewriteEngine On
+RewriteRule ^archive/([^/]*)/$ archive.php?site=$1 [L]
+
+RewriteEngine On
+RewriteRule ^subscribe/$ subscribe.php [L]
+
+RewriteEngine On
+RewriteRule ^thankyou/$ thankyou.php [L]
+
+# ADVERTISING ####################################################################
+
+RewriteEngine On
+RewriteRule ^advertising/$ advertising.php [L]
+
+RewriteEngine On
+RewriteRule ^editorial/$ editorial.php [L]
+
+# CONTACT ####################################################################
+
+RewriteEngine On
+RewriteRule ^contact/$ contact.php [L]
+
+RewriteEngine On
+RewriteRule ^contact/([^/]*)/$ contact.php?subject=$1 [L]
+
+# DOWNLOAD ####################################################################
+
+RewriteEngine On
+RewriteRule ^download$ download.php [L]
+
+RewriteEngine On
+RewriteRule ^download/([^/]*)$ download.php?download=$1 [L]
+
+# SEARCH ####################################################################
+
+RewriteEngine On
+RewriteRule ^search$ search.php [L]
+
+RewriteEngine On
+RewriteRule ^search/([^/]*)$ search.php?search=$1 [L]
+
+RewriteEngine On
+RewriteRule ^search/page/([^/]*)/([^/]*)$ search.php?page=$1&search=$2 [L]
+
+RewriteEngine On
+RewriteRule ^search/([^/]*)/([^/]*)$ search.php?type=$1&search=$2 [L]
+
+RewriteEngine On
+RewriteRule ^search/([^/]*)/page/([^/]*)/([^/]*)$ search.php?type=$1&page=$2&search=$3 [L]
+
+# TERMS ####################################################################
+
+RewriteEngine On
+RewriteRule ^terms/$ tnc.php [L]
+
+# PRIVACY ####################################################################
+
+RewriteEngine On
+RewriteRule ^privacy/$ privacy.php [L]
+
+# CSTV ########################################################################
+
+RewriteEngine On
+RewriteRule ^cstv/$ cstv.php [L]
+
+RewriteEngine On
+RewriteRule ^cstv/([^/]*)/$ cstv.php?id=$1 [L]
+
+# BUYERS GUIDE ####################################################################
+
+RewriteEngine On
+RewriteRule ^buyers-guide/$ buyers-guide.php [L]
+
+RewriteEngine On
+RewriteRule ^buyers-guide/([^/]*)/$ buyers-guide.php?type=$1 [L]
+
+RewriteEngine On
+RewriteRule ^buyers-guide/category/([^/]*)/$ buyers-guide.php?category=$1 [L]
+
+RewriteEngine On
+RewriteRule ^buyers-guide/company/([^/]*)/$ buyers-guide.php?company=$1 [L]
+
+RewriteEngine On
+RewriteRule ^buyers-guide/product/([^/]*)/$ buyers-guide.php?product=$1 [L]
+
+
+################################################################################
+# PUBLISHER ####################################################################
+################################################################################
+
+RewriteEngine On
+RewriteRule ^publisher/issue/$ publisher/issue.php [L]
+
+RewriteEngine On
+RewriteRule ^publisher/issue/([^/]*)/$ publisher/issue.php?magazineId=$1 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/publication/([^/]*)/$ publisher/publication.php?publicationId=$1 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/publication/([^/]*)/([^/]*)/$ publisher/publication.php?publicationId=$1&action=$2 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/publication/([^/]*)/([^/]*)/([^/]*)/$ publisher/publication.php?publicationId=$1&action=$2&magazineId=$3 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/editor/([^/]*)/([^/]*)/$ publisher/editor.php?magazineId=$1&action=$2 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/([^/]*)/image/([^/]*)/$ publisher/image.php?magazineId=$1&pageId=$2 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/editor/([^/]*)/([^/]*)/([^/]*)/$ publisher/editor.php?magazineId=$1&action=$2&pageId=$3 [L]
+
+RewriteEngine On
+RewriteRule ^publisher/magazine/([^/]*)/$ publisher/magazine/index.php?magazineId=$1 [L]
+
+
+
+RewriteEngine On
+RewriteRule ^publisher/magazine/([^/]*)/page/([^/]*)/$ publisher/magazine/index.php?magazineId=$1&pageId=$2 [L]
+
+

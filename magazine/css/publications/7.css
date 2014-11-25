@@ -1,0 +1,76 @@
+h2 {
+	color: #f6b538;
+}
+.logo {
+	background:#fff;	
+}
+.menu-bar {
+	background:#f6b538;
+}
+.icon-menu {
+	
+	border-top:1px solid #f6b538;
+	border-bottom:1px solid #f6b538;	
+}
+.icon-menu:hover {
+	border-top:1px solid #4ee05f;
+	border-bottom:1px solid #f6b538;	
+}
+.icon-menu-active, .icon-menu-active:hover {
+	border-top:1px solid #f6b538;
+	border-bottom:1px solid #4ee05f;
+}
+.symbol {
+	width:100px;
+	height:100px;
+	background-image:URL(/publisher/magazine/images/sybl-footer.png);
+	margin:auto;
+}
+.f_circleG{
+	background-color:#f6b538;
+}
+
+@-moz-keyframes f_fadeG{
+0%{
+background-color:#4ee05f}
+
+100%{
+background-color:#f6b538}
+
+}
+
+@-webkit-keyframes f_fadeG{
+0%{
+background-color:#4ee05f}
+
+100%{
+background-color:#f6b538}
+
+}
+
+@-ms-keyframes f_fadeG{
+0%{
+background-color:#4ee05f}
+
+100%{
+background-color:#f6b538}
+
+}
+
+@-o-keyframes f_fadeG{
+0%{
+background-color:#4ee05f}
+
+100%{
+background-color:#f6b538}
+
+}
+
+@keyframes f_fadeG{
+0%{
+background-color:#4ee05f}
+
+100%{
+background-color:#f6b538}
+
+}
